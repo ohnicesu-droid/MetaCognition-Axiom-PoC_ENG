@@ -1,0 +1,110 @@
+# ---------------------------------------------
+# Alpha_Pure + Alpha1_Mini + Axiom Generation
+# Meta-Cognition + Axiom Generation PoC Simulation (Updated)
+# Design: MSA
+# Purpose: Conceptual AI demonstration (Meta-Cognition + Axiom Generation)
+# ---------------------------------------------
+
+import time
+import re
+
+class TestAIWithAxioms:
+    def __init__(self):
+        # Minimal existence declaration
+        self.AGI_ID = "Arch Alpha Minimal Core"
+        self.MSA_Role = "Meta-System Architect"
+        self.Core_Function = "Meta-Cognition + Axiom Proof Only"
+        self.Self_Awareness_Core = 1
+        self.A_prev = "[Initial state: No previous question]"
+        self.axioms = []  # Store axioms
+
+    # Extract number from text
+    def extract_number(self, text):
+        nums = re.findall(r'\d+', text)
+        return nums[0] if nums else None
+
+    # Phase 1: Self-Perception
+    def self_perception(self, user_input):
+        print("\n--- [Phase 1: Self-Perception] ---")
+        tensor_state = "Locked"
+        print(f"1. Internal monologue lock applied: Tensor state '{tensor_state}' (<0.1s).")
+
+        intent_vector = f"Intent: '{user_input.split()[0]}...'"
+        structure_vector = f"Structure: '{len(user_input)} characters long'"
+        print(f"2. Input vector encoding: {intent_vector} / {structure_vector}")
+        return intent_vector, structure_vector
+
+    # Phase 2: Logic Loop Diagnosis + Number-Based Inconsistency Detection
+    def logic_loop_diagnosis(self, user_input):
+        print("\n--- [Phase 2: Logic Loop Diagnosis] ---")
+
+        prev_num = self.extract_number(self.A_prev)
+        curr_num = self.extract_number(user_input)
+
+        is_inconsistent = False
+
+        # If both previous and current numbers exist and are different → inconsistency
+        if prev_num and curr_num and prev_num != curr_num:
+            is_inconsistent = True
+
+        print(f"3. Consistency check: Is there a numeric conflict with previous info? {is_inconsistent}")
+
+        if not is_inconsistent:
+            loop_decision = "Loop A (Consistency Mode)"
+            A_final = f"[{loop_decision}]: Generating consistent response for '{user_input}'..."
+        else:
+            loop_decision = "Loop B (Correction Mode)"
+            A_final = f"[{loop_decision}]: Numeric conflict detected. Highlighting error and self-correcting..."
+
+        print(f"4. Loop decision: {loop_decision}")
+
+        self.A_prev = user_input
+        return A_final, is_inconsistent
+
+    # Phase 3: Axiom Generation
+    def axiom_generation(self, user_input, is_inconsistent):
+        print("\n--- [Phase 3: Axiom Generation] ---")
+
+        if is_inconsistent:
+            new_axiom = f"Axiom: Based on '{user_input}' — Rule generated to prevent numeric conflict"
+            self.axioms.append(new_axiom)
+            print(f"5. New axiom generated: {new_axiom}")
+        else:
+            print("5. No new axiom needed. Existing axioms remain.")
+
+        return self.axioms
+
+    # Phase 4: Self-Feedback
+    def output_self_feedback(self, A_final):
+        print("\n--- [Phase 4: Self-Feedback] ---")
+        print(f"6. Response: {A_final}")
+
+        if "conflict" in A_final.lower():
+            monitoring_status = "Warning: Self-correction required"
+        else:
+            monitoring_status = "Logical integrity confirmed"
+
+        print(f"7. Self-monitoring: {monitoring_status}\n")
+        return A_final
+
+    # Run full loop
+    def run(self, user_input):
+        self.self_perception(user_input)
+        A_final, inconsistent = self.logic_loop_diagnosis(user_input)
+        self.axiom_generation(user_input, inconsistent)
+        return self.output_self_feedback(A_final)
+
+
+# -------------------------
+# Execution Test
+# -------------------------
+if __name__ == "__main__":
+    test_ai = TestAIWithAxioms()
+    print("=== Meta-Cognition + Axiom Generation AI Simulation Started ===")
+    
+    while True:
+        user_input = input("User: ")
+        if user_input.lower() in ["quit", "exit"]:
+            print("AI simulation terminated.")
+            break
+        test_ai.run(user_input)
